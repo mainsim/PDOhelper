@@ -8,8 +8,6 @@
  * @author Sven Macolic 
  */
 
-#namespace Slayer\models;
-
 class Utils extends PDOProcedureHelper {
 	/** 
 	* @var array multiple inserts error collector 
@@ -65,7 +63,7 @@ class Utils extends PDOProcedureHelper {
 	function __construct() {
 		set_exception_handler([$this, 'exceptionHandler']);
 		Factory::connect();
-    	$this->pdo = Factory::$pdo;
+    		$this->pdo = Factory::$pdo;
 	}
 	/**
     * Validate data types
