@@ -27,7 +27,7 @@ class Connect {
          *
          * @param array $connectionObject
          */
-         function __construct() {
+         function __construct($dbconfig) {
                   set_exception_handler([$this, 'exceptionHandler']);
                   try {
                       //require_once getenv('SLayer').'app_conf.php'; //if set from apache conf enviorment
