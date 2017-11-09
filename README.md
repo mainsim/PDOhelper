@@ -8,6 +8,7 @@ Install stored procedures from sql folder.
 
 Install with composer.json with require in your project
 
+<code>
 {
     "require": {
         "mainsim/PDOhelper": "1.0"
@@ -32,3 +33,4 @@ Install with composer.json with require in your project
 	    }
     ]
 }
+</code>
