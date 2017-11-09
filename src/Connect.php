@@ -7,7 +7,7 @@
  * @license GNU General Public License.
  */
 
-#use PDO;
+namespace mainsim\pdohelper;
 
 class Connect {
          /**

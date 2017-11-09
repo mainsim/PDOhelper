@@ -7,6 +7,8 @@
  * @license GNU General Public License.
  */
 
+namespace mainsim\pdohelper;
+
 class Factory {
       /**
       * @var string Database engine

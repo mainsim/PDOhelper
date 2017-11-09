@@ -8,6 +8,8 @@
  * @author Sven Macolic 
  */
 
+namespace mainsim\pdohelper;
+
 class Utils extends PDOProcedureHelper {
 	/** 
 	* @var array multiple inserts error collector 
