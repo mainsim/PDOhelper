@@ -6,7 +6,6 @@
  * @copyright Copyright (c) 2013 Sven Macolic
  * @license GNU General Public License.
  */
-#namespace Slayer\models;
 
 #use PDO;
 
