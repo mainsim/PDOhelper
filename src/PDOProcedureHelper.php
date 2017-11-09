@@ -10,6 +10,8 @@
 
 namespace mainsim\pdohelper;
 
+use PDO;
+
 class PDOProcedureHelper {
          /** 
          * @var object PDO 

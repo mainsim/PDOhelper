@@ -9,6 +9,8 @@
 
 namespace mainsim\pdohelper;
 
+use PDO;
+
 class Connect {
          /**
          * @var object MySQL
