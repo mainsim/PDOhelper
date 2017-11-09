@@ -75,7 +75,7 @@ $pdo->update([
                         ['f_visibility', '=', -1],
                         ['f_order', '=', 9]
                 ],
-        'operator' => ['AND', 'AND']
+        'operator' => ['AND', 'AND'] // 'operator' => ['(AND)', 'OR']
         ]);
 
     
