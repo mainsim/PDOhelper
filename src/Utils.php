@@ -6,6 +6,7 @@
  * @link  **
  * @copyright Copyright (c) 2017 MainSim
  * @author Sven Macolic 
+ * @license GNU General Public License.
  */
 
 namespace mainsim\pdohelper;
