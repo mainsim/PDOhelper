@@ -31,7 +31,7 @@ class Connect {
                   set_exception_handler([$this, 'exceptionHandler']);
                   try {
                       //require_once getenv('SLayer').'app_conf.php'; //if set from apache conf enviorment
-                    require 'SLayer/app_conf.php';
+                    //require 'SLayer/app_conf.php';
                   } catch (Exception $e) {
                                    throw $e;
                   }
