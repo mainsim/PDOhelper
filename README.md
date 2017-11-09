@@ -21,7 +21,8 @@ Install with composer.json with require in your project
 	        "version": "1.0",
 	        "source": {
 	          "url": "https://github.com/mainsim/PDOhelper.git",
-	          "type": "git"
+	          "type": "git",
+		  "reference": "master"
 	        },
 	        "autoload": {
 		        "psr-4": {
