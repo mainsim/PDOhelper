@@ -8,10 +8,6 @@
  * @license GNU General Public License.
  */
 
-#namespace Slayer\models;
-
-#use PDO;
-
 class PDOProcedureHelper {
          /** 
          * @var object PDO 
