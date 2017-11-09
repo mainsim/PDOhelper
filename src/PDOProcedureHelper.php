@@ -4,7 +4,7 @@
  * Simple data layer
  *
  * @link  **
- * @copyright Copyright (c) 17 Sven Macolic
+ * @copyright Copyright (c) 2017 Sven Macolic
  * @license GNU General Public License.
  */
 
