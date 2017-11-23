@@ -3,7 +3,7 @@
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
 use mainsim\pdohelper\Factory;
-use mainsim\pdohelper\Utils;
+use mainsim\pdohelper\PDOProcedureHelper;
 
 Factory::connect(['driver' => 'PDO',
             'engine' => 'MYSQL',
@@ -15,7 +15,7 @@ Factory::connect(['driver' => 'PDO',
 
 #crud for stored procedures
 
-$pdo = new Utils();
+$pdo = new PDOProcedureHelper();
 
 $pdo->select([
             'tables' => ['t_creation_date as t1'],
