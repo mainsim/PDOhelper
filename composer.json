@@ -1,5 +1,5 @@
 {
-    "name": "mainsim/PDOhelper",
+    "name": "mainsim/pdohelper",
     "type": "library",
     "description": "PDO to Stored procedures helper classes.",
     "keywords": ["pdo"],
