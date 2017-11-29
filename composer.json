@@ -4,6 +4,8 @@
     "description": "PDO to Stored procedures helper classes.",
     "keywords": ["pdo"],
     "license": "MIT",
+    "minimum-stability" : "dev",
+    "prefer-stable" : true
     "authors": [
         {
             "name": "Sven Macolic",
