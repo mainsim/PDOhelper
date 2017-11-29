@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "keywords": ["pdo"],
     "license": "MIT",
-    "minimum-stability" : "dev-master",
+    "minimum-stability" : "stable",
     "authors": [
         {
             "name": "Sven Macolic",
