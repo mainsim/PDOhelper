@@ -1,6 +1,5 @@
-USE [mainsim3_sutter]
+USE [your_db]
 GO
-/****** Object:  StoredProcedure [dbo].[selectData]    Script Date: 06/29/2017 14:17:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER OFF
@@ -41,9 +40,8 @@ BEGIN
 END
 
 
-USE [mainsim3_sutter]
+USE [your_db]
 GO
-/****** Object:  StoredProcedure [dbo].[insertData]    Script Date: 06/29/2017 09:19:18 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,9 +80,8 @@ BEGIN
 	END CATCH
 END
 
-USE [mainsim3_sutter]
+USE [your_db]
 GO
-/****** Object:  StoredProcedure [dbo].[insertMultipleData]    Script Date: 06/29/2017 10:31:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -144,9 +141,8 @@ BEGIN
 END
 
 
-USE [mainsim3_sutter]
+USE [your_db]
 GO
-/****** Object:  StoredProcedure [dbo].[updateData]    Script Date: 06/29/2017 17:33:45 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,9 +180,8 @@ BEGIN
 END
 
 
-USE [mainsim3_sutter]
+USE [your_db]
 GO
-/****** Object:  StoredProcedure [dbo].[deleteData]    Script Date: 06/29/2017 17:08:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -229,9 +224,8 @@ BEGIN
 	END CATCH
 END
 
-USE [mainsim3_sutter]
+USE [your_db]
 GO
-/****** Object:  StoredProcedure [dbo].[tablesColumnsData]    Script Date: 07/03/2017 14:34:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
