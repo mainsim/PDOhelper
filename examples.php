@@ -18,43 +18,43 @@ Factory::connect(['driver' => 'PDO',
 $pdo = new PDOProcedureHelper();
 
 $pdo->select([
-            'tables' => ['t_creation_date as t1'],
+            'tables' => ['table_a as t1'],
             'fields' => ['*'],
             'join' => [
                 [
                     'type' => 'LEFT',
-                    'table' => 't_workorders as t2',
+                    'table' => 'table_b as t2',
                     'condition' => [
-                        ['t2.f_code', '=', 't1.f_id'],
-                        ['t1.fc_editor_user_mail', 'LIKE', 'galanti@mainsim.com']
+                        ['t2.id', '=', 't1.id'],
+                        ['t1.email', 'LIKE', 'xyz@mainsim.com']
                     ],
                     'operator' => ['AND']
                 ],[
                     'type' => 'LEFT',
-                    'table' => 't_custom_fields as t3',
+                    'table' => 'table_c as t3',
                     'condition' => [
-                        ['t3.f_code', '=', 't2.f_code']
+                        ['t3.id', '=', 't2.id']
                     ]
                 ]
             ],
             'condition' => [
-                         ['t1.f_id', '=', 1]
+                         ['t1.id', '=', 1]
             ]
         ]);
 
 $pdo->insert([
-        'table' => 't_wf_groups',
+        'table' => 'groups',
         'fields' => [
-                     'f_group' => 'Wayn',
-                     'f_order' => 9,
-                     'f_visibility' => -1
+                     'group' => 'Wayn',
+                     'order' => 9,
+                     'visibility' => -1
                      ],
          'increment' => 'f_id'
         ]);
 
 $pdo->insertMultiple([
-        'table' => 't_wf_groups',
-        'fields' => ['f_group', 'f_order', 'f_visibility'],
+        'table' => 'roups',
+        'fields' => ['group', 'order', 'visibility'],
         'data' => [
                 ['John', 10, -1],  
                 ['Wayne', 11, -1],
@@ -66,23 +66,23 @@ $pdo->insertMultiple([
     ]);
 
 $pdo->update([
-        'table' => 't_wf_groups',
+        'table' => 'groups',
         'fields' => [
-                     'f_group' => 'Tiger'
+                     'group' => 'Tiger'
                      ],
         'condition' => [
-                        ['f_id', '=', 9],
-                        ['f_visibility', '=', -1],
-                        ['f_order', '=', 9]
+                        ['id', '=', 9],
+                        ['visibility', '=', -1],
+                        ['order', '=', 9]
                 ],
         'operator' => ['AND', 'AND'] // 'operator' => ['(AND)', 'OR']
         ]);
 
     
 $pdo->delete([
-             'table' => 't_wf_groups',
+             'table' => 'groups',
              'condition' => [
-                             ['f_id', '>', 8]
+                             ['id', '>', 8]
                              ]
         ]);
 
@@ -101,16 +101,16 @@ $pdo->isInDb();
 $pdo->getTableColumns() // no parameters
 
 #return true if table exists
-$pdo->isInDb('t_creation_date'); 
+$pdo->isInDb('table_a'); 
 
 #return true if field exists in table
-$pdo->isInDb('t_creation_date', 'f_id'); 
+$pdo->isInDb('table_a', 'id'); 
 
 #return true if type exists in table field type list
-$pdo->isInDb('t_creation_date', 'f_id', 'string'); 
+$pdo->isInDb('table_a', 'id', 'string'); 
 
 #return type if type exists in table field type list
-$pdo->isInDb('t_creation_date', 'f_id', '', true); 
+$pdo->isInDb('table_a', 'id', '', true); 
 
 
 
