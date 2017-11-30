@@ -3,6 +3,7 @@
     "type": "library",
     "description": "PDO to Stored procedures helper classes.",
     "license": "MIT",
+    "keywords" : ["pdohelper"],
     "authors": [
         {
             "name": "Sven Macolic",
