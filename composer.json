@@ -22,7 +22,7 @@
     },
     "repositories": [
         {
-            "type": "git",
+            "type": "package",
             "url": "https://github.com/mainsim/PDOhelper.git"
         }
     ]
