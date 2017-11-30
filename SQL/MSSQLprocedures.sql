@@ -33,7 +33,7 @@ BEGIN
 		  CAST(ERROR_SEVERITY() AS VARCHAR) + ' : ' +
 		  CAST(ERROR_STATE() AS VARCHAR) + ' : ' +
 		  'selectData : ' +
-		  ERROR_MESSAGE() + ' : ' +
+		  ERROR_MESSAGE() + ' : ' + 
 		  CAST(ERROR_LINE() AS VARCHAR) + ' : ' +
 		  @_query;
 		SELECT @DetailedErrorDesc AS mssqlerror;
