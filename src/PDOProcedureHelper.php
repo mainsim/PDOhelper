@@ -5,7 +5,7 @@
  *
  * @link  **
  * @copyright Copyright (c) 2017 Sven Macolic
- * @license GNU General Public License.
+ * @license MIT.
  */
 
 namespace mainsim\pdohelper;
