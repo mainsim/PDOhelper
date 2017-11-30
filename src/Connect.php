@@ -31,14 +31,8 @@ class Connect {
          */
          function __construct($dbconfig) {
                   set_exception_handler([$this, 'exceptionHandler']);
-                  try {
-                      //require_once getenv('SLayer').'app_conf.php'; //if set from apache conf enviorment
-                    //require 'SLayer/app_conf.php';
-                  } catch (Exception $e) {
-                                   throw $e;
-                  }
                   self::$conn = (object)$dbconfig;
-                  $this->db = self::$conn->database;
+                  $this->db = self::$conn->database; 
          }
          /**
          * Set PDO driver

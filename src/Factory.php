@@ -31,9 +31,9 @@ class Factory {
       *
       * @return object
       */
-      public static function connect() {
+      public static function connect($db) {
              if(!isset(self::$object['database'])):
-                                                    self::$object['database'] = new Connect();
+                                                    self::$object['database'] = new Connect($db);
                                                     self::$pdo = self::$object['database']->PDOConnect(); // TODO switch for other drivers (pg, mysql, mysqli)
                                                     self::$db = self::$object['database']->db;
                                                     self::$engine = self::$object['database']::$conn->engine;

@@ -18,6 +18,15 @@ class PDOProcedureHelper {
          */
          public $pdo;
          /**
+         * Class constructor
+         *
+         * @return void
+         */
+         function __construct() {
+             set_exception_handler([$this, 'exceptionHandler']);
+             $this->pdo = Factory::$pdo;
+         }
+         /**
          * Get database records
          *
          * @param array $dataObject
@@ -47,7 +56,7 @@ class PDOProcedureHelper {
                 $query->bindParam(5, $group, PDO::PARAM_STR);
                 $query->bindParam(6, $order, PDO::PARAM_STR);
                 $query->bindParam(7, $limit, PDO::PARAM_STR);
-    
+
                 try {
                   $query->execute();
                   return self::getArray($query->fetchAll(), $type);
@@ -62,7 +71,6 @@ class PDOProcedureHelper {
          */
          public function insert($dataObject, $type = false) {
                 $do = (object)$dataObject;
-
                 $table = $do->table;
                 $fields = self::parseInsertFields($do->fields);
                 $values = self::parseInsertValues($do->fields);
@@ -77,7 +85,7 @@ class PDOProcedureHelper {
                 $query->bindParam(2, $fields, PDO::PARAM_STR);
                 $query->bindParam(3, $values, PDO::PARAM_STR);
                 $query->bindParam(4, $increment, PDO::PARAM_STR);
-
+    
                 try {
                     $query->execute();
                     return self::getArray($query->fetchAll(), $type);
@@ -442,7 +450,7 @@ class PDOProcedureHelper {
                  while($crumbs = each($condition)):
                    $collect = '';
                    while(list($k, $val) = each($crumbs['value'])):
-                    $collect .= $k == 2 ? ((is_numeric($val) || !preg_match('/\@/', $val)) ? $val.' ' : '\''.$val.'\' ') : $val.' ';
+                    $collect .= $k == 2 ? (is_numeric($val) && $crumbs['value'][1] != 'LIKE' ? $val.' ' : '\''.$val.'\' ') : $val.' ';
                    endwhile;
                    array_push($collectQuery, $collect);
                    if($operator != NULL):
