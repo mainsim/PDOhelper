@@ -11,26 +11,7 @@ Install with composer.json with require in your project
 <pre>
 {
     "require": {
-        "mainsim/PDOhelper": "1.0"
-    },
-    "repositories": [
-        {
-	      "type": "package",
-	      "package": {
-	        "name": "mainsim/PDOhelper",
-	        "version": "1.0",
-	        "source": {
-	          "url": "https://github.com/mainsim/PDOhelper.git",
-	          "type": "git",
-		  "reference": "master"
-	        },
-	        "autoload": {
-		        "psr-4": {
-		            "mainsim\\pdohelper\\": "src/"
-		        }
-		    }
-	      }
-	    }
-    ]
+        "mainsim/pdohelper": ">=2.0.0"
+    }
 }
 </pre>
