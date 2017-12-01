@@ -149,7 +149,8 @@ END
 
 CREATE PROCEDURE `deleteData`(
 	IN _table VARCHAR(255),
-	IN _condition TEXT
+	IN _condition TEXT,
+	IN _increment VARCHAR(30)
 )
 BEGIN
 	DECLARE code CHAR(5) DEFAULT '00000';
