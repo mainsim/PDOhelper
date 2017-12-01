@@ -158,14 +158,16 @@ class PDOProcedureHelper {
 
                 $table = $do->table;
                 $condition = self::parseCondition($do->condition, (property_exists($do, 'operator') ? $do->operator : NULL));
+                $increment = $do->increment;
 
                 switch(strtolower(Factory::$engine)):
-                        case 'mysql': $query = $this->pdo->prepare('CALL deleteData(?, ?)'); break;
-                        case 'sqlsrv': $query = $this->pdo->prepare('EXEC deleteData ?, ?'); break;
+                        case 'mysql': $query = $this->pdo->prepare('CALL deleteData(?, ?, ?)'); break;
+                        case 'sqlsrv': $query = $this->pdo->prepare('EXEC deleteData ?, ?, ?'); break;
                 endswitch;
 
                 $query->bindParam(1, $table, PDO::PARAM_STR);
                 $query->bindParam(2, $condition, PDO::PARAM_STR);
+                $query->bindParam(3, $increment, PDO::PARAM_STR);
 
                 try {
                     $query->execute();
