@@ -449,7 +449,7 @@ class PDOProcedureHelper {
                  while($crumbs = each($condition)):
                    $collect = '';
                    while(list($k, $val) = each($crumbs['value'])):
-                    $collect .= $k == 2 ? (is_numeric($val) && $crumbs['value'][1] != 'LIKE' ? $val.' ' : '\''.$val.'\' ') : $val.' ';
+                    $collect .= $k == 2 ? (is_numeric($val) || (preg_match('/\./', $val) && !preg_match('/\@/', $val)) ? $val.' ' : '\''.$val.'\' ') : $val.' ';
                    endwhile;
                    array_push($collectQuery, $collect);
                    if($operator != NULL):
