@@ -83,7 +83,8 @@ $pdo->delete([
              'table' => 'groups',
              'condition' => [
                              ['id', '>', 8]
-                             ]
+                             ],
+             'increment' => 'id'
         ]);
 
 $pdo->addColumns([
