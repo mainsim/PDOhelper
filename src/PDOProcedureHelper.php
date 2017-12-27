@@ -19,8 +19,9 @@ class PDOProcedureHelper {
          *
          * @return void
          */
-         function __construct() {
+         function __construct($db) {
              set_exception_handler([$this, 'exceptionHandler']);
+             Factory::connect($db);
              $this->pdo = Factory::$pdo;
          }
          /**
