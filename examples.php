@@ -2,20 +2,19 @@
 
 require_once dirname(__FILE__).'/vendor/autoload.php';
 
-use mainsim\pdohelper\Factory;
 use mainsim\pdohelper\PDOProcedureHelper;
 
-Factory::connect(['driver' => 'PDO',
+$db = ['driver' => 'PDO',
             'engine' => 'MYSQL',
             'database' => 'yourDB',
             'host' => 'localhost',
             'user' => 'root', 
             'password' => ''
-        ]);
+        ];
 
 #crud for stored procedures
 
-$pdo = new PDOProcedureHelper();
+$pdo = new PDOProcedureHelper($db);
 
 $pdo->select([
             'tables' => ['table_a as t1'],
