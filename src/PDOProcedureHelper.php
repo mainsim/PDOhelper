@@ -176,6 +176,15 @@ class PDOProcedureHelper {
                 } catch(Exception $e) {}
          }
          /**
+         *Query database
+         *
+         * @param string $q
+         * @return array
+         */
+         public function query($q) {
+                return $this->pdo->query($q);
+         }
+         /**
          *Add columns to database table
          *
          * @param array $dataObject
