@@ -1,8 +1,11 @@
 <?php
 
 /**
+ * Simple data layer
+ *
+ * @link  **
  * @copyright Copyright (c) 2017 Sven Macolic
- * @license MIT.
+ * @license GNU General Public License.
  */
 
 namespace mainsim\pdohelper;
@@ -14,6 +17,14 @@ class PDOProcedureHelper {
          * @var object PDO 
          */
          public $pdo;
+         /** 
+         * @var string engine 
+         */
+         public $engine;
+         /** 
+         * @var string engine 
+         */
+         public $db;
          /**
          * Class constructor
          *
@@ -21,8 +32,10 @@ class PDOProcedureHelper {
          */
          function __construct($db) {
              set_exception_handler([$this, 'exceptionHandler']);
-             Factory::connect($db);
-             $this->pdo = Factory::$pdo;
+             $conn = new Factory($db);
+             $this->pdo = $conn->pdo;
+             $this->engine = $conn->engine;
+             $this->db = $conn->db;
          }
          /**
          * Get database records
@@ -42,7 +55,7 @@ class PDOProcedureHelper {
                 $order = property_exists($do, 'order') ? self::parseSelectOrder($do->order) : '';
                 $limit = property_exists($do, 'limit') ? self::parseSelectLimit($do->limit) : '';
 
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL selectData(?, ?, ?, ?, ?, ?, ?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC selectData ?, ?, ?, ?, ?, ?, ?'); break;
                 endswitch;
@@ -65,7 +78,7 @@ class PDOProcedureHelper {
          *
          * @param array $dataObject
          * @param boolean $type
-         * @return void / Exception
+         * @return array / Exception
          */
          public function insert($dataObject, $type = false) {
                 $do = (object)$dataObject;
@@ -74,7 +87,7 @@ class PDOProcedureHelper {
                 $values = self::parseInsertValues($do->fields);
                 $increment = $do->increment;
 
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL insertData(?, ?, ?, ?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC insertData ?, ?, ?, ?'); break;
                 endswitch;
@@ -94,7 +107,7 @@ class PDOProcedureHelper {
          *
          * @param array $dataObject
          * @param boolean $type
-         * @return void / Exception
+         * @return array / Exception
          */
          public function insertMultiple($dataObject, $type = false) {
                 $do = (object)$dataObject;
@@ -104,7 +117,7 @@ class PDOProcedureHelper {
                 $data = self::parseInsertMultipleValues($do->data);
                 $increment = $do->increment;
 
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL insertMultipleData(?, ?, ?, ?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC insertMultipleData ?, ?, ?, ?'); break;
                 endswitch;
@@ -124,7 +137,7 @@ class PDOProcedureHelper {
          *
          * @param array $dataObject
          * @param boolean $type
-         * @return void / Exception
+         * @return array / Exception
          */
          public function update($dataObject, $type = false) {
                 $do = (object)$dataObject;
@@ -133,7 +146,7 @@ class PDOProcedureHelper {
                 $fields = self::parseUpdateFields($do->fields);
                 $condition = self::parseCondition($do->condition, (property_exists($do, 'operator') ? $do->operator : NULL));
 
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL updateData(?, ?, ?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC updateData ?, ?, ?'); break;
                 endswitch;
@@ -152,7 +165,7 @@ class PDOProcedureHelper {
          *
          * @param array $dataObject
          * @param boolean $type
-         * @return void / Exception
+         * @return array / Exception
          */
          public function delete($dataObject, $type = false) {
                 $do = (object)$dataObject;
@@ -161,7 +174,7 @@ class PDOProcedureHelper {
                 $condition = self::parseCondition($do->condition, (property_exists($do, 'operator') ? $do->operator : NULL));
                 $increment = $do->increment;
 
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL deleteData(?, ?, ?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC deleteData ?, ?, ?'); break;
                 endswitch;
@@ -179,10 +192,17 @@ class PDOProcedureHelper {
          *Query database
          *
          * @param string $q
-         * @return array
+         * @param boolean $type
+         * @return array / Exception
          */
-         public function query($q) {
-                return $this->pdo->query($q);
+         public function query($q, $type = false) {
+                print_r($this->db);
+                $query = $this->pdo->prepare($q);
+                try {
+                    $query->execute();
+                    print_r($query->fetchAll());
+                    return self::getArray($query->fetchAll(), $type);
+                } catch(Exception $e) {}
          }
          /**
          *Add columns to database table
@@ -221,12 +241,12 @@ class PDOProcedureHelper {
          * @return boolean
          */
          public function isInDb($table = '', $field = '', $search = '', $type_return = false, $type = false) {
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL tablesColumnsData(?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC tablesColumnsData ?'); break;
                 endswitch;
 
-                $query->bindParam(1, Factory::$db, PDO::PARAM_STR);
+                $query->bindParam(1, $this->db, PDO::PARAM_STR);
 
                 try {
                     $query->execute();
@@ -273,12 +293,12 @@ class PDOProcedureHelper {
          * @return array
          */
          public function getTableColumns($type = false) {
-                switch(strtolower(Factory::$engine)):
+                switch(strtolower($this->engine)):
                         case 'mysql': $query = $this->pdo->prepare('CALL tablesColumnsData(?)'); break;
                         case 'sqlsrv': $query = $this->pdo->prepare('EXEC tablesColumnsData ?'); break;
                 endswitch;
 
-                $query->bindParam(1, Factory::$db, PDO::PARAM_STR);
+                $query->bindParam(1, $this->db, PDO::PARAM_STR);
 
                 try {
                     $query->execute();
