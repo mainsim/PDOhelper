@@ -196,11 +196,10 @@ class PDOProcedureHelper {
          * @return array / Exception
          */
          public function query($q, $type = false) {
-                print_r($this->db);
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $query = $this->pdo->prepare($q);
                 try {
                     $query->execute();
-                    print_r($query->fetchAll());
                     return self::getArray($query->fetchAll(), $type);
                 } catch(Exception $e) {}
          }
@@ -211,6 +210,7 @@ class PDOProcedureHelper {
          * @return boolean
          */
          public function addColumns($dataObject) {
+                $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $do = (object)$dataObject;
                 $sql = 'ALTER TABLE '.$do->table.' '; 
 
@@ -220,10 +220,6 @@ class PDOProcedureHelper {
 
                 $sql = substr($sql, 0, -1).';';
                 $query = $this->pdo->prepare($sql);
-
-                if(!$query):
-                    return false;
-                endif;
 
                 try {
                     $query->execute();
