@@ -11,7 +11,7 @@ Install with composer.json with require in your project
 <pre>
 {
     "require": {
-        "mainsim/pdohelper": "^2.0"
+        "mainsim/pdohelper": "^2.1"
     }
 }
 </pre>
