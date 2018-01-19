@@ -39,7 +39,7 @@ class Connect {
          public function PDOConnect() {
                  try {
                      switch(strtolower(self::$conn->engine)) {
-                        case 'mysql': return new PDO(strtolower(self::$conn->engine).':host='.self::$conn->host.';dbname='.self::$conn->database, self::$conn->user, self::$conn->password);
+                        case 'mysql': return new PDO(strtolower(self::$conn->engine).':host='.self::$conn->host.';dbname='.self::$conn->database, self::$conn->user, self::$conn->password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING]);
                         case 'sqlsrv': return new PDO(strtolower(self::$conn->engine).':Server='.self::$conn->host.';Database='.self::$conn->database.';ConnectionPooling=0', self::$conn->user, self::$conn->password);
                      }                     
                  } catch (Exception $e) {}
